@@ -5,10 +5,12 @@
   "source": "./dist/renderer/frontend/index.js",
   "main": "./build/index.js",
   "scripts": {
+    "build": "tsc && webpack",
+    "build:tsc": "tsc",
+    "build:bundel": "webpack",
     "watch": "nodemon ./dist/server/index.js",
     "watch:tsc": "tsc-watch",
-    "build:tsc": "tsc",
-    "build": "webpack",
+    "watch:bundel": "webpack --watch",
     "start": "node ./dist/server/index.js",
     "publish": "node ./dist/publisher/index.js"
   },
