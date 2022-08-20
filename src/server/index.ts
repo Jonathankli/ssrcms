@@ -7,6 +7,8 @@ import rendererPage from '../renderer/renderer';
 const app = express();
 const port = 3000
 
+app.use("/assets", express.static(path.join(__dirname, "..", "..", "build", "assets")));
+
 app.get('*', async (req, res) => {
     const sitePath = pathGenerator(req.originalUrl);
 

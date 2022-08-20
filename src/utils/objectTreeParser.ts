@@ -15,7 +15,9 @@ export type PublishObjectDTO = {
 
 const parseObject = (dto: PublishObjectDTO): PublishObjectDTO => {
     const reactComponent = cmsObjects[dto.object.type];
+    
     dto.object.Component = reactComponent.default;
+    dto.object.filepath = reactComponent.FILEPATH;
 
     if(dto.type == ParseType.SSG && reactComponent.getSsgData) {
         dto.data[dto.object.id] = reactComponent.getSsgData(dto.object.settings);

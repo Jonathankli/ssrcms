@@ -1,4 +1,5 @@
 import React from 'react';
+import cmsObjects from "../../cmsobjects/index";
 
 const ComponentTree = (props) => {
 
@@ -8,15 +9,17 @@ const ComponentTree = (props) => {
     } = props;
 
     const objectData = data[cmsObject.id];
+    const Component = cmsObjects[cmsObject.type]?.default
+    
 
     return ( 
-        <cmsObject.Component 
+        <Component 
             data={objectData}
             settings={cmsObject.settings}
             id={cmsObject.id}
         >
             {cmsObject.children?.map?.(child => <ComponentTree key={child.id} cmsObject={child} />)}
-        </cmsObject.Component>
+        </Component>
     );
 }
  

@@ -1,9 +1,9 @@
 export const CmsObjectTypes = Object.freeze({
-    headline: "headline",
-    dynHeadline: "dynHeadline",
+    Headline: "Headline",
+    DynHeadline: "DynHeadline",
 })
 
 export default {
-    headline: require("./headline/Headline.js"),
-    dynHeadline: require("./dynHeadline/Headline.js"),
+    Headline: require("./headline/Headline.js"),
+    DynHeadline: require("./dynHeadline/Headline.js"),
 }

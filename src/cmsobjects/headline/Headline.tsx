@@ -18,3 +18,5 @@ export const getSsgData = async settings => {
         name: await axios.get("https://random-data-api.com/api/v2/users").then(res => res.data.first_name)
     }
 }  
+
+export const FILEPATH = __filename;
