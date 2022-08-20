@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = (options) => {
     return {
         mode: 'development',
-        entry: "./dist/renderer/frontend/index.js",
+        entry: "./dist/frontend/index.js",
         output: {
             path: path.join(__dirname, 'build', 'assets'),
             filename: 'bundle.js',

@@ -1,5 +1,5 @@
 import React from 'react';
-import ComponentTree from './ComponentTree';
+import ComponentTree from './components/ComponentTree';
 
 declare global {
     interface Window {

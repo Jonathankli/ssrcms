@@ -1,6 +1,6 @@
-import * as ReactDOMServer from 'react-dom/server';
-import * as React from 'react';
-import Template from "./frontend/Template";
+import ReactDOMServer from 'react-dom/server';
+import React from 'react';
+import Template from "../frontend/Template";
 
 const rendererPage = (components, data, renderComponentTree = true): string => {
 
@@ -10,7 +10,7 @@ const rendererPage = (components, data, renderComponentTree = true): string => {
         <Template data={data} cmsObjects={cmsObjects} renderComponentTree={renderComponentTree} />
     )
 
-    return html;
+    return "<!DOCTYPE html>" + html;
     
 
 }
