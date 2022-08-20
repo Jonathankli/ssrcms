@@ -20,8 +20,6 @@ const publishPage = async (page, pagePath) => {
         await fs.promises.unlink(pathGenerator(page.path, "index.html"));
     }
 
-    //build bundel
-
 }
 
 const publish = async pages => {

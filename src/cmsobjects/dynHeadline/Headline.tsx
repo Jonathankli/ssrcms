@@ -18,7 +18,7 @@ export default props => {
     )
 }
 
-export const getSsgData = async settings => {
+export const getSsrData = async settings => {
     return {
         name: await axios.get("https://random-data-api.com/api/v2/users").then(res => res.data.first_name)
     }
