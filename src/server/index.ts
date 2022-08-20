@@ -13,7 +13,7 @@ app.get('*', async (req, res) => {
     const sitePath = pathGenerator(req.originalUrl);
 
     await fs.promises.access(sitePath).catch(err => {
-        res.sendFile(path.join(__dirname, "..", "..", "static", "404.html"));
+        res.sendFile(path.join(__dirname, "..", "..", "build", "404", "index.html"));
         return;
     })
 
