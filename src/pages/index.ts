@@ -11,11 +11,5 @@ export default {
             settings: { title: "Hochschule Darmstadt" },
             children: []
         },
-        {
-            id: uuid(),
-            type: CmsObjectTypes.DynHeadline,
-            settings: { title: "Hochschule Darmstadt Dyn" },
-            children: []
-        }
     ]
 }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import styled from "styled-components"
 
 export default props => {
 
@@ -9,9 +10,13 @@ export default props => {
     } = props;
 
     return (
-        <h1>{ settings.title } { data.name }</h1>
+        <Headline>{ settings.title } { data.name }</Headline>
     )
 }
+
+const Headline = styled.h1`
+    color: red
+`
 
 export const getSsgData = async settings => {
     return {
