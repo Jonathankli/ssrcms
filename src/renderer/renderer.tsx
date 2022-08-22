@@ -4,10 +4,8 @@ import Template from "../frontend/Template";
 
 const rendererPage = (components, data, renderComponentTree = true): string => {
 
-    const cmsObjects = components.map(comp => comp.object);
-
     const html = ReactDOMServer.renderToString(
-        <Template data={data} cmsObjects={cmsObjects} renderComponentTree={renderComponentTree} />
+        <Template data={data} cmsObjects={components} renderComponentTree={renderComponentTree} />
     )
 
     return "<!DOCTYPE html>" + html;

@@ -1,19 +1,15 @@
-import express from 'express'
+import { Request, Response } from "express";
+import pathGenerator from "../../utils/pathGenerator";
+import fs from "fs";
 import path from "path";
-import parseObjectTree, { ParseType } from '../utils/objectTreeParser';
-import rendererPage from '../renderer/renderer';
-import renderController from './controller/renderController';
+import parseObjectTree, { ParseType } from '../../utils/objectTreeParser';
+import rendererPage from '../../renderer/renderer';
 
-const app = express();
-const port = 3000
-
-app.use("/assets", express.static(path.join(__dirname, "..", "..", "build", "assets")));
-
-app.get('*', async (req, res) => {
+const renderController = async (req: Request, res: Response) => {
     const sitePath = pathGenerator(req.originalUrl);
 
     await fs.promises.access(sitePath).catch(err => {
-        res.sendFile(path.join(__dirname, "..", "..", "build", "404", "index.html"));
+        res.status(404).sendFile(path.join(__dirname, "..", "..", "..", "build", "404", "index.html"));
         return;
     })
 
@@ -39,10 +35,6 @@ app.get('*', async (req, res) => {
     const html = rendererPage(components, combinedData);
 
     res.send(html);
-})
-app.get('*', renderController);
+}
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
+export default renderController;
