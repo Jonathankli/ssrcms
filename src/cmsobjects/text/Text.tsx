@@ -1,22 +1,22 @@
 import React from "react";
 
 type settingsType = {
-    title: string,
-    type: keyof React.ReactDOM,
+    text: string,
     align: any,
+    color: any,
     marginTop: number
     marginBottom: number
 }
 
 const defaultSettings: settingsType = {
-    title: "Überschrift",
-    type: "h1",
+    text: "Lorem ipsum",
     align: "center",
+    color: "black",
     marginTop: 20,
     marginBottom: 20,
 }
 
-const Headline = props => {
+const Text = props => {
 
     const {
         settings: _settings,
@@ -24,17 +24,17 @@ const Headline = props => {
     } = props;
 
     const settings = {...defaultSettings, _settings};
-    const HeadlineTag: keyof React.ReactDOM = settings.type;
 
     return (
-        <HeadlineTag style={{
+        <p style={{
             textAlign: settings.align, 
             marginTop: settings.marginTop + "px",
             marginBottom: settings.marginBottom + "px",
+            color: settings.color
         }}>
-            { settings.title }
-        </HeadlineTag>
+            { settings.text }
+        </p>
     )
 }
 
-export default Headline;
+export default Text;
