@@ -8,9 +8,8 @@ const ComponentTree = (props) => {
         data
     } = props;
 
-    const objectData = data[cmsObject.id];
+    const objectData = data?.[cmsObject.id];
     const Component = cmsObjects[cmsObject.type]?.default
-    
 
     return ( 
         <Component 
