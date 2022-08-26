@@ -3,6 +3,7 @@ export const CmsObjectTypes = Object.freeze({
     Text: "Text",
     Section: "Section",
     Grid: "Grid",
+    Navi: "Navi",
 })
 
 export default {
@@ -10,4 +11,5 @@ export default {
     Text: require("./text/Text.js"),
     Section: require("./section/Section.js"),
     Grid: require("./grid/Grid.js"),
+    Navi: require("./navi/Navi.js"),
 }
