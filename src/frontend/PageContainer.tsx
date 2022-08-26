@@ -48,6 +48,8 @@ const PageContainer = (props) => {
         setCmsObjectTree(response.data.data.components);
         setData(response.data.data.pageData);
 
+        document.title = response.data.data.title;
+
         const nextURL = 'http://localhost:3000'+path;
         const nextTitle = response.data.data.pageData?.title;
         const nextState = { 

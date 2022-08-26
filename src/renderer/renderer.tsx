@@ -2,10 +2,10 @@ import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import Template from "../frontend/Template";
 
-const rendererPage = (components, data, renderComponentTree = true): string => {
+const rendererPage = (components, data, title, renderComponentTree = true): string => {
 
     const html = ReactDOMServer.renderToString(
-        <Template data={data} cmsObjects={components} renderComponentTree={renderComponentTree} />
+        <Template data={data} cmsObjects={components} title={title} renderComponentTree={renderComponentTree} />
     )
 
     return "<!DOCTYPE html>" + html;

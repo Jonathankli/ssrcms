@@ -23,8 +23,8 @@ export const getPageData = async (req: Request, res: Response) => {
         return;
     })
 
-    const pageData = (await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString();
-    const { data, components, usesSsg, usesSsr } = await parseObjectTree(JSON.parse(pageData), ParseType.SSR);
+    const pageData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString());
+    const { data, components, usesSsg, usesSsr } = await parseObjectTree(pageData, ParseType.SSR);
     
     let _data = data;
     if(usesSsg) {
@@ -38,7 +38,8 @@ export const getPageData = async (req: Request, res: Response) => {
         status: "success",
         data: {
             components,
-            pageData: _data
+            pageData: _data,
+            title: pageData.title
         }
     });
     

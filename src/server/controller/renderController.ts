@@ -19,8 +19,8 @@ const renderController = async (req: Request, res: Response) => {
         return;
     }
 
-    const pageData = (await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString();
-    const { data, components, usesSsg, usesSsr } = await parseObjectTree(JSON.parse(pageData), ParseType.SSR);
+    const pageData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString());
+    const { data, components, usesSsg, usesSsr } = await parseObjectTree(pageData, ParseType.SSR);
 
     let combinedData = data;
     
@@ -32,7 +32,7 @@ const renderController = async (req: Request, res: Response) => {
         }        
     }
 
-    const html = rendererPage(components, combinedData);
+    const html = rendererPage(components, combinedData, pageData.title);
 
     res.send(html);
 }

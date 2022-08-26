@@ -12,7 +12,7 @@ const publishPage = async (page, pagePath) => {
     await fs.promises.writeFile(pathGenerator(page.path, "pageData.json"), JSON.stringify(page));
     
     if(usesSsg && !usesSsr) {
-        const html = rendererPage(components, data, true);
+        const html = rendererPage(components, data, page.title, true);
         await fs.promises.writeFile(pathGenerator(page.path, "index.html"), html);
     }
 
