@@ -1,29 +1,38 @@
-import axios from "axios";
 import React from "react";
-import useNavigate from "../../frontend/hooks/usNavigate";
-import styled from "styled-components"
+
+type settingsType = {
+    title: string,
+    type: keyof React.ReactDOM,
+    align: any,
+    marginTop: number
+    marginBottom: number
+}
+
+const defaultSettings: settingsType = {
+    title: "Überschrift",
+    type: "h1",
+    align: "center",
+    marginTop: 20,
+    marginBottom: 20,
+}
 
 export default props => {
 
     const {
-        settings,
-        data,
+        settings: _settings,
         id
     } = props;
 
-    const navigate = useNavigate();
+    const settings = {...defaultSettings, _settings};
+    const HeadlineTag: keyof React.ReactDOM = settings.type;
 
     return (
-        <Headline onClick={navigate.bind(this, "/test")}>{ settings.title } { data.name }</Headline>
+        <HeadlineTag style={{
+            textAlign: settings.align, 
+            marginTop: settings.marginTop + "px",
+            marginBottom: settings.marginBottom + "px",
+        }}>
+            { settings.title }
+        </HeadlineTag>
     )
 }
-
-const Headline = styled.h1`
-    color: red;
-`
-
-export const getSsgData = async settings => {
-    return {
-        name: await axios.get("https://random-data-api.com/api/v2/users").then(res => res.data.first_name)
-    }
-}  
