@@ -23,7 +23,7 @@ const Headline = props => {
         id
     } = props;
 
-    const settings = {...defaultSettings, _settings};
+    const settings = {...defaultSettings, ..._settings};
     const HeadlineTag: keyof React.ReactDOM = settings.type;
 
     return (

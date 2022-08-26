@@ -18,7 +18,7 @@ const Grid = props => {
         children
     } = props;
 
-    const settings = {...defaultSettings, _settings};
+    const settings = {...defaultSettings, ..._settings};
 
     return (
         <>

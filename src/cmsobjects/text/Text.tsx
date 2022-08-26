@@ -23,7 +23,7 @@ const Text = props => {
         id
     } = props;
 
-    const settings = {...defaultSettings, _settings};
+    const settings = {...defaultSettings, ..._settings};
 
     return (
         <p style={{
