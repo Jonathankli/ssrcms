@@ -22,13 +22,20 @@ const parseObject = (dto: PublishObjectDTO): PublishObjectDTO => {
     if(dto.type == ParseType.SSR && reactComponent.getSsrData) {
         dto.data[dto.object.id] = reactComponent.getSsrData(dto.object.settings);
     }
-    
+
     dto.usesSsg ||= !!reactComponent.getSsgData;
     dto.usesSsr ||= !!reactComponent.getSsrData;
 
     if(dto.object.children?.length) {
         dto.object.children = dto.object.children.map(child => {
-            return parseObject({ ...dto, object: child }).object;
+            const parsed = parseObject({ ...dto, object: child });
+            dto.usesSsg ||= parsed.usesSsg;
+            dto.usesSsr ||= parsed.usesSsr;
+            dto.data = {
+                ...dto.data,
+                ...parsed.data
+            };
+            return parsed.object;
         });
     }
 
@@ -54,6 +61,7 @@ const parseObjectTree = async (root, type: ParseType = ParseType.SSG) => {
         };
         usesSsg ||= parsed.usesSsg;
         usesSsr ||= parsed.usesSsr;
+        
         return parsed.object;
     });
     
