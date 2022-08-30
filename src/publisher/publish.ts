@@ -1,7 +1,7 @@
 import fs from "fs";
 import pathGenerator from "../utils/pathGenerator";
 import parseObjectTree, { ParseType } from "../utils/objectTreeParser";
-import rendererPage from "../renderer/renderer";
+import rendererPage from "../utils/renderer";
 
 const publishPage = async (page, pagePath) => {
     

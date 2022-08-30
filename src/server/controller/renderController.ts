@@ -3,7 +3,7 @@ import pathGenerator from "../../utils/pathGenerator";
 import fs from "fs";
 import path from "path";
 import parseObjectTree, { ParseType } from '../../utils/objectTreeParser';
-import rendererPage from '../../renderer/renderer';
+import rendererPage from '../../utils/renderer';
 
 const renderController = async (req: Request, res: Response) => {
     const sitePath = pathGenerator(req.originalUrl);
