@@ -24,7 +24,7 @@ export const getPageData = async (req: Request, res: Response) => {
     })
 
     const pageData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString());
-    const { data, components, usesSsg, usesSsr } = await parseObjectTree(pageData, ParseType.SSR);
+    const { data, components, usesSsg, usesSsr } = await parseObjectTree(pageData, ParseType.REQUEST);
     
     let _data = data;
     if(usesSsg) {

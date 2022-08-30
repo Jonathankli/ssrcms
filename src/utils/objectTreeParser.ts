@@ -1,8 +1,8 @@
 import cmsObjects from "../cmsobjects";
 
 export enum ParseType{
-    SSG,
-    SSR
+    PUBLISH,
+    REQUEST
 }
 
 export type PublishObjectDTO = {
@@ -10,21 +10,35 @@ export type PublishObjectDTO = {
     type: ParseType,
     usesSsr: boolean,
     usesSsg: boolean,
+    usesIsr: boolean,
+    initData: {[key: string]: any},
     data: {[key: string]: any}
 }
 
 const parseObject = (dto: PublishObjectDTO): PublishObjectDTO => {
     const reactComponent = cmsObjects[dto.object.type];
 
-    if(dto.type == ParseType.SSG && reactComponent.getSsgData) {
-        dto.data[dto.object.id] = reactComponent.getSsgData(dto.object.settings);
+    if(dto.type == ParseType.PUBLISH && reactComponent.getSsgData) {
+        dto.data[dto.object.id] = {
+            data: reactComponent.getSsgData(dto.object.settings),
+            validUntill: reactComponent.isrTimeliness ? (new Date((new Date).getTime() + reactComponent.isrTimeliness * 1000)).getTime() : 0
+        };
     }
-    if(dto.type == ParseType.SSR && reactComponent.getSsrData) {
-        dto.data[dto.object.id] = reactComponent.getSsrData(dto.object.settings);
+    if(dto.type == ParseType.REQUEST) {        
+        if(dto.initData[dto.object.id]?.validUntill && (new Date).getTime() - dto.initData[dto.object.id]?.validUntill > 0) {
+            dto.data[dto.object.id] = {
+                data: reactComponent.getSsgData(dto.object.settings),
+                validUntill: (new Date((new Date).getTime() + reactComponent.isrTimeliness * 1000)).getTime()
+            };
+        }
+        if(reactComponent.getSsrData) {
+            dto.data[dto.object.id] = reactComponent.getSsrData(dto.object.settings);
+        }
     }
 
     dto.usesSsg ||= !!reactComponent.getSsgData;
     dto.usesSsr ||= !!reactComponent.getSsrData;
+    dto.usesIsr ||= !!reactComponent.isrTimeliness;
 
     if(dto.object.children?.length) {
         dto.object.children = dto.object.children.map(child => {
@@ -42,18 +56,21 @@ const parseObject = (dto: PublishObjectDTO): PublishObjectDTO => {
     return dto;
 }
 
-const parseObjectTree = async (root, type: ParseType = ParseType.SSG) => {
+const parseObjectTree = async (root, type: ParseType = ParseType.PUBLISH, initData = {}) => {
     let data: {[key: string]: any} = {};
     let usesSsg = false;
     let usesSsr = false;
+    let usesIsr = false;
 
     const components: PublishObjectDTO[] = root.children.map(object => {
         const parsed = parseObject({
             object,
             type,
+            initData,
             data: {},
             usesSsg: false,
-            usesSsr: false
+            usesSsr: false,
+            usesIsr: false,
         });
         data = {
             ...data,
@@ -61,15 +78,19 @@ const parseObjectTree = async (root, type: ParseType = ParseType.SSG) => {
         };
         usesSsg ||= parsed.usesSsg;
         usesSsr ||= parsed.usesSsr;
+        usesIsr ||= parsed.usesIsr;
         
         return parsed.object;
     });
     
-    let dataResolved = await Promise.all(Object.values(data));
+    let dataResolved = await Promise.all(Object.values(data).map(d => d.data));
     const dataKeys = Object.keys(data);
     
-    data = dataResolved.reduce((acc, data, index) => {
-        acc[dataKeys[index]] = data;
+    data = dataResolved.reduce((acc, objData, index) => {    
+        acc[dataKeys[index]] = {
+            data: objData,
+            validUntill: data[dataKeys[index]].validUntill
+        };
         return acc;
     }, {});
     
@@ -77,7 +98,8 @@ const parseObjectTree = async (root, type: ParseType = ParseType.SSG) => {
         data,
         components,
         usesSsg,
-        usesSsr
+        usesSsr,
+        usesIsr,
     }
 
 }

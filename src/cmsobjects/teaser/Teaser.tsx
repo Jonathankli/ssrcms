@@ -40,7 +40,7 @@ const Navi = props => {
     )
 }
 
-export const getSsrData = async settings => {
+export const getSsgData = async settings => {
     return await axios.post("http://olimar-ibe.test/api/teaser/bestOffer", {
         "limit": 1,
         "hotelsGiataList": [
@@ -57,5 +57,7 @@ export const getSsrData = async settings => {
         "durationTo": 7,
     }).then(res => res.data.result[0]);
 }
+
+export const isrTimeliness = 10;
 
 export default Navi;

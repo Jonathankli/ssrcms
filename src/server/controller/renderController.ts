@@ -13,28 +13,35 @@ const renderController = async (req: Request, res: Response) => {
         return;
     })
 
-    const files = await fs.promises.readdir(sitePath);
-    if(files.includes("index.html")) {
+    const ssgData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "data.json"))).toString());
+    const pageData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString());
+    const { data, components, usesSsg, usesSsr, usesIsr } = await parseObjectTree(pageData, ParseType.REQUEST, ssgData);
+
+    if(!usesSsr && !Object.keys(data).length) {
         res.sendFile(path.join(sitePath, "index.html"))
         return;
     }
 
-    const pageData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString());
-    const { data, components, usesSsg, usesSsr } = await parseObjectTree(pageData, ParseType.SSR);
-
     let combinedData = data;
     
-    if(usesSsg) {
-        const ssgData = await fs.promises.readFile(path.join(sitePath, "data.json"));
+    if(usesSsg || usesIsr) {
         combinedData = {
-            ...JSON.parse(ssgData.toString()),
+            ...ssgData,
             ...combinedData
-        }        
+        }     
     }
 
     const html = rendererPage(components, combinedData, pageData.title);
 
     res.send(html);
+
+    if(!usesSsr) {      
+        await fs.promises.writeFile(path.join(sitePath, "index.html"), html);
+        await fs.promises.writeFile(path.join(sitePath, "data.json"), JSON.stringify({
+            ...ssgData,
+            ...combinedData
+        }));
+    }
 }
 
 export default renderController;

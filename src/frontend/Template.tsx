@@ -5,8 +5,13 @@ const Template = (props) => {
     
     let contetnt = <div id="root"></div>
 
+    const data = {};
+    Object.keys(props.data).forEach(key => {
+        data[key] = props.data[key].data;
+    });
+
     if(props.renderComponentTree) {
-        contetnt = <div id="root"><PageContainer initCmsObjectTree={props.cmsObjects} initData={props.data}/></div>
+        contetnt = <div id="root"><PageContainer initCmsObjectTree={props.cmsObjects} initData={data}/></div>
     }
     
     return ( 
@@ -17,7 +22,7 @@ const Template = (props) => {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>{props.title}</title>
             <script dangerouslySetInnerHTML={{ __html: `var initCmsObjectTree = ${JSON.stringify(props.cmsObjects)};`}}></script>
-            <script dangerouslySetInnerHTML={{ __html: `var initData = ${JSON.stringify(props.data)};`}}></script>
+            <script dangerouslySetInnerHTML={{ __html: `var initData = ${JSON.stringify(data)};`}}></script>
             <script defer src='assets/bundle.js' />
         </head>
         <body style={{margin: 0, padding: 0}}> 

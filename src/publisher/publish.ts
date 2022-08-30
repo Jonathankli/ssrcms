@@ -5,7 +5,7 @@ import rendererPage from "../utils/renderer";
 
 const publishPage = async (page, pagePath) => {
     
-    const { data, components, usesSsg, usesSsr } = await parseObjectTree(page, ParseType.SSG);
+    const { data, components, usesSsg, usesSsr } = await parseObjectTree(page, ParseType.PUBLISH);
 
     await fs.promises.mkdir(pathGenerator(page.path), { recursive: true });
     await fs.promises.writeFile(pathGenerator(page.path, "data.json"), JSON.stringify(data));
