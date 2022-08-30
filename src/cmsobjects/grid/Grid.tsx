@@ -3,11 +3,13 @@ import React from "react";
 type settingsType = {
     marginTop: number
     marginBottom: number
+    sideSpace: number
 }
 
 const defaultSettings: settingsType = {
     marginTop: 20,
     marginBottom: 20,
+    sideSpace: 10
 }
 
 const Grid = props => {
@@ -26,8 +28,8 @@ const Grid = props => {
                 marginTop: settings.marginTop + "px",
                 marginBottom: settings.marginBottom + "px",
             }}>
-                <div style={{width: "50%", float: "left"}}>{children?.[0]}</div>
-                <div style={{width: "50%", float: "left"}}>{children?.[1]}</div>
+                <div style={{width: `calc( 50% - ${2*settings.sideSpace}px)`, float: "left", padding: `0 ${settings.sideSpace}px`}}>{children?.[1]}</div>
+                <div style={{width: `calc( 50% - ${2*settings.sideSpace}px)`, float: "left", padding: `0 ${settings.sideSpace}px`}}>{children?.[0]}</div>
                 <div style={{clear: "both", height: "0"}}></div>
             </div>
         </>

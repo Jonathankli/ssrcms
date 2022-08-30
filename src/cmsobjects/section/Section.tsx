@@ -25,7 +25,7 @@ const Section = props => {
     return (
         <>
             <div style={{
-                color: settings.color,
+                backgroundColor: settings.color,
                 marginTop: settings.marginTop + "px",
                 marginBottom: settings.marginBottom + "px",
             }}>
