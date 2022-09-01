@@ -34,6 +34,10 @@ export const getPageData = async (req: Request, res: Response) => {
         }
     }
 
+    Object.keys(_data).forEach(key => {
+        _data[key] = _data[key].data;
+    });
+
     res.status(200).json({
         status: "success",
         data: {
