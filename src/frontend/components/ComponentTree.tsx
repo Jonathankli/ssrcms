@@ -1,19 +1,19 @@
 import React from 'react';
 import cmsObjects from "../../cmsobjects/index";
+import useCmsObjectData from '../hooks/useCmsObjectData';
 
 const ComponentTree = (props) => {
 
     const {
-        cmsObject,
-        data
+        cmsObject
     } = props;
 
-    const objectData = data?.[cmsObject.id];
     const Component = cmsObjects[cmsObject.type]?.default
+    const data = useCmsObjectData(cmsObject.id);
 
     return ( 
         <Component 
-            data={objectData}
+            data={data}
             settings={cmsObject.settings}
             id={cmsObject.id}
         >

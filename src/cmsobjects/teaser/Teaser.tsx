@@ -14,10 +14,8 @@ const Navi = props => {
 
     const {
         settings: _settings,
-        id
+        data
     } = props;
-
-    const data = useCmsObjectData(id);
     
     return (
         <div style={{

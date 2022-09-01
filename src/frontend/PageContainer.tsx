@@ -63,7 +63,7 @@ const PageContainer = (props) => {
 
     return (
         <PageContext.Provider value={{data, navigate}}>
-            { cmsObjectTree.map?.(child => <ComponentTree key={child.id} cmsObject={child} data={data} />)}
+            { cmsObjectTree.map?.(child => <ComponentTree key={child.id} cmsObject={child} />)}
         </PageContext.Provider>
     )
 }
