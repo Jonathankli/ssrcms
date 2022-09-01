@@ -10,7 +10,7 @@ const defaultSettings: settingsType = {
     links: [],
 }
 
-const Navi = props => {
+const Teaser = props => {
 
     const {
         settings: _settings,
@@ -48,7 +48,6 @@ export const getSsgData = async settings => {
         "endDate": "15.03.2023",
         "adults": 2,
         "children": [],
-        "directFlight": false,
         "minCategory": 3,
         "productType": "pauschal",
         "durationFrom": 7,
@@ -58,4 +57,4 @@ export const getSsgData = async settings => {
 
 export const isrTimeliness = 10;
 
-export default Navi;
+export default Teaser;
