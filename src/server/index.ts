@@ -4,7 +4,7 @@ import { getPageData } from './controller/pageConroller';
 import renderController from './controller/renderController';
 
 const app = express();
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.use("/assets", express.static(path.join(__dirname, "..", "..", "build", "assets")));
 

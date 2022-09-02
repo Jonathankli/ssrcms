@@ -12,7 +12,8 @@
     "watch:tsc": "tsc-watch",
     "watch:bundel": "webpack --watch",
     "start": "node ./dist/server/index.js",
-    "publish": "node ./dist/publisher/index.js"
+    "publish": "node ./dist/publisher/index.js",
+    "postinstall": "npm run build && npm run publish"
   },
   "keywords": [],
   "author": "",
