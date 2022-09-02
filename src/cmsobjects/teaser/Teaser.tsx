@@ -1,14 +1,5 @@
 import axios from "axios";
 import React from "react";
-import useCmsObjectData from "../../frontend/hooks/useCmsObjectData";
-
-type settingsType = {
-    links: Array<{ href: string, title: string }>
-}
-
-const defaultSettings: settingsType = {
-    links: [],
-}
 
 const Teaser = props => {
 

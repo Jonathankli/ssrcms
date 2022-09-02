@@ -21,6 +21,7 @@ const Template = (props) => {
             <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>{props.title}</title>
+            <meta name="description" content={props.metaDescription || "Bachelor Test App"} />
             <script dangerouslySetInnerHTML={{ __html: `var initCmsObjectTree = ${JSON.stringify(props.cmsObjects)};`}}></script>
             <script dangerouslySetInnerHTML={{ __html: `var initData = ${JSON.stringify(data)};`}}></script>
             <script defer src='assets/bundle.js' />

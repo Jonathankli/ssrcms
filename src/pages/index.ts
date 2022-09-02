@@ -61,7 +61,7 @@ export default {
                             id: uuid(),
                             type: CmsObjectTypes.Teaser,
                             settings: {
-                                hotelId: 23747
+                                hotelId: 40930
                             },
                             children: []
                         },
@@ -69,7 +69,7 @@ export default {
                             id: uuid(),
                             type: CmsObjectTypes.Teaser,
                             settings: {
-                                hotelId: 1287679
+                                hotelId: 136581
                             },
                             children: []
                         },
