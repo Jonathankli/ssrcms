@@ -52,29 +52,29 @@ export default {
             type: CmsObjectTypes.Section,
             settings: {},
             children: [
-                // {
-                //     id: uuid(),
-                //     type: CmsObjectTypes.Grid,
-                //     settings: {},
-                //     children: [
-                //         {
-                //             id: uuid(),
-                //             type: CmsObjectTypes.Teaser,
-                //             settings: {
-                //                 hotelId: 40930
-                //             },
-                //             children: []
-                //         },
-                //         {
-                //             id: uuid(),
-                //             type: CmsObjectTypes.Teaser,
-                //             settings: {
-                //                 hotelId: 136581
-                //             },
-                //             children: []
-                //         },
-                //     ]
-                // },
+                {
+                    id: uuid(),
+                    type: CmsObjectTypes.Grid,
+                    settings: {},
+                    children: [
+                        {
+                            id: uuid(),
+                            type: CmsObjectTypes.Teaser,
+                            settings: {
+                                hotelId: 4
+                            },
+                            children: []
+                        },
+                        {
+                            id: uuid(),
+                            type: CmsObjectTypes.Teaser,
+                            settings: {
+                                hotelId: 14
+                            },
+                            children: []
+                        },
+                    ]
+                },
             ]
         },
     ]

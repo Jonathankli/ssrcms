@@ -7,6 +7,7 @@ const Teaser = props => {
         settings: _settings,
         data
     } = props;
+    console.log(data);
     
     return (
         <div style={{
@@ -14,15 +15,15 @@ const Teaser = props => {
             width: "100%",
         }}>
             <div style={{width: "100%", height: "200px"}}>
-                <img src={data.image.cover?.src} style={{width: "100%", height: "100%", objectFit: "cover"}}/>
+                <img src={data.image} style={{width: "100%", height: "100%", objectFit: "cover"}} alt={data.name}/>
             </div>
             <div style={{padding: "30px"}}>
                 <p style={{fontWeight: "bold", fontSize: "20px"}}>
                     {data.name}
                 </p>
-                <div style={{}} dangerouslySetInnerHTML={{__html: data.description.substring(0, 450) + "..."}}></div>
+                <div> {data.description} </div>
                 <div style={{fontSize: "20px"}}>
-                    <span style={{fontSize: "14px"}}>p.p ab</span> {data.price.bestPricePerPerson.value},- €
+                    <span style={{fontSize: "14px"}}>p.p ab</span> {data.price},- €
                 </div>
             </div>
         </div>
@@ -30,20 +31,8 @@ const Teaser = props => {
 }
 
 export const getSsgData = async settings => {
-    return await axios.post("http://olimar-ibe.test/api/teaser/bestOffer", {
-        "limit": 1,
-        "hotelsGiataList": [
-            settings.hotelId
-        ],
-        "startDate": "11.09.2022",
-        "endDate": "15.03.2023",
-        "adults": 2,
-        "children": [],
-        "minCategory": 3,
-        "productType": "pauschal",
-        "durationFrom": 7,
-        "durationTo": 7,
-    }).then(res => res.data.result[0]);
+    return await axios.get(`https://bachelor-api.herokuapp.com/api/hotels/${settings.hotelId}/teaser`)
+        .then(res => res.data.data);
 }
 
 export const isrTimeliness = 10;
