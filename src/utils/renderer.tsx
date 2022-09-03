@@ -1,6 +1,5 @@
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
-import Template from "../frontend/Template";
 import Helmet from "react-helmet";
 import PageContainer from '../frontend/PageContainer';
 
