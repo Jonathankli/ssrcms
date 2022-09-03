@@ -28,7 +28,6 @@ const rendererPage = (components, data, title): string => {
         </>
     )
     const helmet = Helmet.renderStatic();
-    console.log(title);
 
     const html = `
         <!doctype html>
