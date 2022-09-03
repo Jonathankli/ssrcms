@@ -14,7 +14,7 @@ const publishPage = async (page, pagePath) => {
         await fs.promises.writeFile(pathGenerator(page.path, "pageData.json"), JSON.stringify(page));
         
         if(!usesSsr) {
-            const html = rendererPage(components, data, page.title, true);
+            const html = rendererPage(components, data, page.title);
             await fs.promises.writeFile(pathGenerator(page.path, "index.html"), html);
         }
     

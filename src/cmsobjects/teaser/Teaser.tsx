@@ -7,7 +7,6 @@ const Teaser = props => {
         settings: _settings,
         data
     } = props;
-    console.log(data);
     
     return (
         <div style={{
