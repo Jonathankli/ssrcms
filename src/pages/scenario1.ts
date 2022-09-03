@@ -3,14 +3,14 @@ import { v4 as uuid } from "uuid";
 import globalNavigationConfig from "../utils/globalNavigationConfig";
 
 export default {
-    title: "Startseite",
-    path: "/",
+    title: "Landingpage",
+    path: "/szenario1",
     children: [
         globalNavigationConfig,
         {
             id: uuid(),
             type: CmsObjectTypes.Headline,
-            settings: { title: "Hochschule Darmstadt" },
+            settings: { title: "Das ist die Test GmbH" },
             children: []
         },
         {
@@ -42,8 +42,16 @@ export default {
         {
             id: uuid(),
             type: CmsObjectTypes.Section,
-            settings: {},
+            settings: {
+                color: "#ccc"
+            },
             children: [
+                {
+                    id: uuid(),
+                    type: CmsObjectTypes.Headline,
+                    settings: { title: "Werde teil des Teams", type: "h2" },
+                    children: []
+                },
                 {
                     id: uuid(),
                     type: CmsObjectTypes.Grid,
@@ -51,21 +59,43 @@ export default {
                     children: [
                         {
                             id: uuid(),
-                            type: CmsObjectTypes.Teaser,
+                            type: CmsObjectTypes.Image,
                             settings: {
-                                hotelId: 4
+                                src: "https://picsum.photos/id/1/200/300",
+                                alt: "Arbeit"
                             },
                             children: []
                         },
                         {
                             id: uuid(),
-                            type: CmsObjectTypes.Teaser,
+                            type: CmsObjectTypes.Text,
                             settings: {
-                                hotelId: 14
+                                text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
                             },
                             children: []
                         },
                     ]
+                },
+            ]
+        },
+        {
+            id: uuid(),
+            type: CmsObjectTypes.Section,
+            settings: {},
+            children: [
+                {
+                    id: uuid(),
+                    type: CmsObjectTypes.Headline,
+                    settings: { title: "Teamwork!", type: "h2" },
+                    children: []
+                },
+                {
+                    id: uuid(),
+                    type: CmsObjectTypes.Text,
+                    settings: {
+                        text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                    },
+                    children: []
                 },
             ]
         },

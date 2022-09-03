@@ -2,14 +2,14 @@ import React from "react";
 
 type settingsType = {
     color: any,
-    marginTop: number
-    marginBottom: number
+    paddingTop: number
+    paddingBottom: number
 }
 
 const defaultSettings: settingsType = {
     color: "rgba(0,0,0,0)",
-    marginTop: 20,
-    marginBottom: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
 }
 
 const Section = props => {
@@ -26,8 +26,8 @@ const Section = props => {
         <>
             <div style={{
                 backgroundColor: settings.color,
-                marginTop: settings.marginTop + "px",
-                marginBottom: settings.marginBottom + "px",
+                paddingTop: settings.paddingTop + "px",
+                paddingBottom: settings.paddingBottom + "px",
             }}>
                 <div style={{maxWidth: "900px", margin: "auto"}}>
                     {children}
