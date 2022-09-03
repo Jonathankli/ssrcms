@@ -50,7 +50,7 @@ const PageContainer = (props) => {
 
         document.title = response.data.data.title;
 
-        const nextURL = 'http://localhost:3000'+path;
+        const nextURL = window.location.origin+path;
         const nextTitle = response.data.data.pageData?.title;
         const nextState = { 
             cmsObjectTree: response.data.data.components,
