@@ -7,6 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000
 
 app.use("/assets", express.static(path.join(__dirname, "..", "..", "build", "assets")));
+app.use(express.static(path.join(__dirname, "..", "..", "public")));
 
 app.get('/api/pageData', getPageData);
 app.get('*', renderController);
