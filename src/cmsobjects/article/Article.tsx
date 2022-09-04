@@ -23,7 +23,7 @@ const Article = props => {
                 }}/>
             </div>
             <h1 style={{textAlign: "center", margin: "auto", maxWidth: "900px", paddingTop: "20px"}}>{data.title}</h1>
-            <p style={{textAlign: "center"}}>{data.author}, {date.getDay()}.{date.getMonth()}.{date.getFullYear()} </span>
+            <p style={{textAlign: "center"}}>{data.author}, {date.getDay()}.{date.getMonth()}.{date.getFullYear()} </p>
             <p style={{margin: "auto", maxWidth: "900px"}}>{data.text}</p>
         </>
 
