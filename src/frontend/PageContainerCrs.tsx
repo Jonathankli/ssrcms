@@ -33,9 +33,9 @@ const PageContainerCrs = (props) => {
     }, [])
 
     const navigate = useCallback(async path => {
-        const response = await axios.get("/api/pageData", {
+        const response = await axios.get("/api/pageData/csr", {
             params: {
-                path
+                path: "/csr"+path
             }
         });
         if(response.data.status !== "success") {
@@ -47,7 +47,7 @@ const PageContainerCrs = (props) => {
 
         document.title = response.data.data.title;
 
-        const nextURL = window.location.origin+path;
+        const nextURL = window.location.origin+"/csr"+path;
         const nextTitle = response.data.data.pageData?.title;
         const nextState = { 
             cmsObjectTree: response.data.data.components
@@ -65,10 +65,10 @@ const PageContainerCrs = (props) => {
             };
         });
         return objects;
-    }, [])    
+    }, [])
 
     return (
-        <PageContext.Provider value={{navigate, data: {}}}>
+        <PageContext.Provider value={{data: {}, navigate}}>
             { cmsObjectTree.map?.(child => <ComponentTree key={child.id} cmsObject={child} cmsObjects={_cmsObjects}/>)}
         </PageContext.Provider>
     )

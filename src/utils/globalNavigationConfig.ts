@@ -10,7 +10,8 @@ const globalNavigationConfig = {
             {href: "/szenario2", title: "Szenario 2"},
             {href: "/szenario3", title: "Szenario 3"},
             {href: "/szenario4", title: "Szenario 4"},
-            {href: "/szenario5", title: "Szenario 5"},
+            {href: "/csr", title: "CSR", reload: true},
+            {href: "/", title: "Default", reload: true},
         ]
     },
     children: []

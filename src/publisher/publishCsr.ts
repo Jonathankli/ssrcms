@@ -23,7 +23,7 @@ const publishPage = async (page, pagePath) => {
                 <script>
                     var initCmsObjectTree = ${JSON.stringify(components)};
                 </script>
-                <script defer src="assets/bundleCsr.js"></script>
+                <script defer src="/assets/bundleCsr.js"></script>
             </head>
             <body style="padding: 0; margin: 0;">
                 <div id="root"></div>

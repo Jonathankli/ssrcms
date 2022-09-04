@@ -19,6 +19,10 @@ const Navi = props => {
     const settings = {...defaultSettings, ..._settings};
     const navigate = useNavigate();
 
+    const navigateSwitch = path => {
+        document.location.href = path;
+    }
+
     return (
         <div style={{
             padding: "20px 0",
@@ -26,7 +30,7 @@ const Navi = props => {
         }}>
             <ul style={{display: "table", margin: "auto", listStyle: "none"}}>
                 {settings.links.map((link, i) => (
-                    <li key={i} onClick={navigate.bind(this, link.href)} style={{float: "left", padding: "0 20px", cursor: "pointer"}}>{ link.title }</li>
+                    <li key={i} onClick={link.reload ? navigateSwitch.bind(this, link.href) : navigate.bind(this, link.href)} style={{float: "left", padding: "0 20px", cursor: "pointer"}}>{ link.title }</li>
                 ))}
             </ul>
             <div style={{clear: "both", height: "0"}}></div>
