@@ -7,6 +7,7 @@ export const CmsObjectTypes = Object.freeze({
     Navi: "Navi",
     Teaser: "Teaser",
     Article: "Article",
+    Hoteldetail: "Hoteldetail",
 })
 
 export default {
@@ -18,4 +19,5 @@ export default {
     Teaser: require("./teaser/Teaser.js"),
     Image: require("./image/Image.js"),
     Article: require("./article/Article.js"),
+    Hoteldetail: require("./hoteldetail/Hoteldetail.js"),
 }
