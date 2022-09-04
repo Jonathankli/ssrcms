@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = (options) => {
     return {
-        mode: 'development',
+        mode: 'production', //process.env.NODE_ENV || 'development',
         entry: "./dist/frontend/index.js",
         output: {
             path: path.join(__dirname, 'build', 'assets'),
