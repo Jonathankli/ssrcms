@@ -11,7 +11,7 @@ const rendererPage = (components, data, title): string => {
     });
 
     const appHtml = ReactDOMServer.renderToString(
-        <>
+        <div id="root">
             <Helmet
                 bodyAttributes={{
                     style: "padding: 0; margin: 0;"
@@ -24,7 +24,7 @@ const rendererPage = (components, data, title): string => {
                 <script defer src='assets/bundle.js' />
             </Helmet>
             <PageContainer initCmsObjectTree={components} initData={_data}/>
-        </>
+        </div>
     )
     const helmet = Helmet.renderStatic();
 
@@ -42,9 +42,7 @@ const rendererPage = (components, data, title): string => {
                 ${helmet.script.toString()}
             </head>
             <body ${helmet.bodyAttributes.toString()}>
-                <div id="root">
-                    ${appHtml}
-                </div>
+                ${appHtml}
             </body>
         </html>
     `;
