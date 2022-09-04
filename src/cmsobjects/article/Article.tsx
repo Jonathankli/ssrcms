@@ -8,6 +8,8 @@ const Article = props => {
         data
     } = props;
 
+    const date = new Date(data.created_at);
+
     return (
         <>
             <Helmet>
@@ -20,9 +22,9 @@ const Article = props => {
                     objectFit: "cover"
                 }}/>
             </div>
-            <h1 style={{textAlign: "center"}}>{data.title}</h1>
-            <span>{data.author}, {data.updatedAt} </span>
-            <p>{data.text}</p>
+            <h1 style={{textAlign: "center", margin: "auto", maxWidth: "900px", paddingTop: "20px"}}>{data.title}</h1>
+            <p style={{textAlign: "center"}}>{data.author}, {date.getDay()}.{date.getMonth()}.{date.getFullYear()} </span>
+            <p style={{margin: "auto", maxWidth: "900px"}}>{data.text}</p>
         </>
 
     )
