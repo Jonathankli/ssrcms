@@ -8,10 +8,12 @@ import rendererPage from '../../utils/renderer';
 const renderController = async (req: Request, res: Response) => {
     const sitePath = pathGenerator(req.originalUrl);
 
-    await fs.promises.access(sitePath).catch(err => {
+    try {
+        await fs.promises.access(sitePath);
+    } catch (error) {
         res.status(404).sendFile(path.join(__dirname, "..", "..", "..", "build", "404", "index.html"));
         return;
-    })
+    }
 
     const ssgData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "data.json"))).toString());
     const pageData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString());
