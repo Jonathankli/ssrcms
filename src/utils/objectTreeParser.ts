@@ -34,8 +34,11 @@ const parseObject = (dto: PublishObjectDTO): PublishObjectDTO => {
                 };
             }
             if(reactComponent.getSsrData) {
-                dto.data[dto.object.id] = reactComponent.getSsrData(dto.object.settings);
-            }
+                dto.data[dto.object.id] = {
+                    data: reactComponent.getSsrData(dto.object.settings),
+                    validUntill: 0
+                };
+            }            
         }
     }
 
