@@ -25,9 +25,11 @@ const Hoteldetail = props => {
                     objectFit: "cover"
                 }}/>
             </div>
-            <h1 style={{textAlign: "center", margin: "auto", maxWidth: "900px", paddingTop: "20px"}}>{data.name}</h1>
+            <h1 style={{textAlign: "center", maxWidth: "900px", margin: "20px auto"}}>{data.name}</h1>
             <div style={{
                 marginTop: "20px",
+                maxWidth: "900px",
+                margin: "auto"
             }}>
                 <div style={{width: `calc( 50% - ${2*20}px)`, float: "left", padding: `0 ${20}px`}}>
                     <b>{data.stars} Sterne</b><br/>
