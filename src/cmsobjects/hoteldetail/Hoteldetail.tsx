@@ -48,7 +48,7 @@ const Hoteldetail = props => {
 }
 
 export const getSsrData = async settings => {
-    return await axios.get(`http://bachelor_api.test/api/hotels/${settings.hotelId}`)
+    return await axios.get(`https://bachelor-api.herokuapp.com/api/hotels/${settings.hotelId}`)
         .then(res => res.data.data);
 }
 
