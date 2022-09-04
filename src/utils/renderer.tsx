@@ -14,14 +14,13 @@ const rendererPage = (components, data, title): string => {
         <div id="root">
             <Helmet
                 bodyAttributes={{
-                    style: "padding: 0; margin: 0;"
+                    style: "padding: 0; margin: 0;",
+                }}
+                htmlAttributes={{
+                    lang: "de",
                 }}
             >
                 <title>{title}</title>
-                <meta charSet="UTF-8" />
-                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <script defer src='assets/bundle.js' />
             </Helmet>
             <PageContainer initCmsObjectTree={components} initData={_data}/>
         </div>
@@ -35,11 +34,14 @@ const rendererPage = (components, data, title): string => {
                 ${helmet.title.toString()}
                 ${helmet.meta.toString()}
                 ${helmet.link.toString()}
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <script>
                     var initData = ${JSON.stringify(_data)};
                     var initCmsObjectTree = ${JSON.stringify(components)};
                 </script>
-                ${helmet.script.toString()}
+                <script defer src='assets/bundle.js'></script>
             </head>
             <body ${helmet.bodyAttributes.toString()}>
                 ${appHtml}
