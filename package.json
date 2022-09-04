@@ -5,10 +5,10 @@
   "source": "./dist/renderer/frontend/index.js",
   "main": "./build/index.js",
   "scripts": {
-    "build": "tsc && webpack",
+    "build": "npm run build:tsc && npm run build:bundel && npm run build:bundel:csr",
     "build:tsc": "tsc",
     "build:bundel": "webpack",
-    "build:bundel:crs": "webpack --config webpack.crs.config.js",
+    "build:bundel:csr": "webpack --config webpack.crs.config.js",
     "watch": "nodemon ./dist/server/index.js",
     "watch:tsc": "tsc-watch",
     "watch:bundel": "webpack --watch",
