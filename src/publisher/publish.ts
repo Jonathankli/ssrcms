@@ -33,7 +33,7 @@ const publish = async pages => {
     const promises = pages.map(page => {
         const pageData = require(page).default;
         console.log("Publish: " + pageData.title);
-        publishPage(pageData, page);
+        return publishPage(pageData, page);
     });
     await Promise.allSettled(promises);
 

@@ -1,35 +1,32 @@
 import axios from 'axios';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import ComponentTree from './components/ComponentTree';
 import cmsObjects from "../cmsobjects/index";
+import crsObjects from '../cmsobjects/crs';
+import CrsWrapper from './components/CrsWrapper';
 
 declare global {
     interface Window {
-        initCmsObjectTree: Object;
-        initData: Object;
+        initCmsObjectTree: Object
     }
 }
 
 export const PageContext = React.createContext({navigate: path => {}, data: {}});
 
-const PageContainer = (props) => {
+const PageContainerCrs = (props) => {
 
     const {
-        initCmsObjectTree,
-        initData
+        initCmsObjectTree
     } = props;
 
     const [ cmsObjectTree, setCmsObjectTree ] = React.useState(initCmsObjectTree || window?.initCmsObjectTree);
-    const [ data, setData ] = React.useState(initData || window?.initData);
 
     useEffect(() => {
         window.history.replaceState({ 
-            cmsObjectTree,
-            data
+            cmsObjectTree
         }, "");
         const onChange = event => {
             setCmsObjectTree(event.state.cmsObjectTree);
-            setData(event.state.data);
         }
         addEventListener('popstate', onChange);
         return () => removeEventListener('popstate', onChange);
@@ -47,26 +44,34 @@ const PageContainer = (props) => {
         }
         
         setCmsObjectTree(response.data.data.components);
-        setData(response.data.data.pageData);
 
         document.title = response.data.data.title;
 
         const nextURL = window.location.origin+path;
         const nextTitle = response.data.data.pageData?.title;
         const nextState = { 
-            cmsObjectTree: response.data.data.components,
-            data: response.data.data.pageData
+            cmsObjectTree: response.data.data.components
         };
 
         window.history.pushState(nextState, nextTitle, nextURL);
-    }, [setCmsObjectTree, setData])
-    
+    }, [setCmsObjectTree])
+
+    const _cmsObjects = useMemo(() => {
+        const objects = {...cmsObjects};
+        crsObjects.forEach(obj => {
+            objects[obj] = {
+                ...objects[obj],
+                default: props => <CrsWrapper {...props} object={cmsObjects[obj]} />
+            };
+        });
+        return objects;
+    }, [])    
 
     return (
-        <PageContext.Provider value={{data, navigate}}>
-            { cmsObjectTree.map?.(child => <ComponentTree key={child.id} cmsObject={child} cmsObjects={cmsObjects}/>)}
+        <PageContext.Provider value={{navigate, data: {}}}>
+            { cmsObjectTree.map?.(child => <ComponentTree key={child.id} cmsObject={child} cmsObjects={_cmsObjects}/>)}
         </PageContext.Provider>
     )
 }
  
-export default PageContainer;
+export default PageContainerCrs;

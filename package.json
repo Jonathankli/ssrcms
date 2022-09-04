@@ -8,9 +8,11 @@
     "build": "tsc && webpack",
     "build:tsc": "tsc",
     "build:bundel": "webpack",
+    "build:bundel:crs": "webpack --config webpack.crs.config.js",
     "watch": "nodemon ./dist/server/index.js",
     "watch:tsc": "tsc-watch",
     "watch:bundel": "webpack --watch",
+    "watch:bundel:crs": "webpack --watch --config webpack.crs.config.js",
     "start": "node ./dist/server/index.js",
     "publish": "node ./dist/publisher/index.js",
     "postinstall": "npm run build && npm run publish"

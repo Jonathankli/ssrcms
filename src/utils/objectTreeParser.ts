@@ -2,7 +2,8 @@ import cmsObjects from "../cmsobjects";
 
 export enum ParseType{
     PUBLISH,
-    REQUEST
+    REQUEST,
+    CSR
 }
 
 export type PublishObjectDTO = {
@@ -18,21 +19,23 @@ export type PublishObjectDTO = {
 const parseObject = (dto: PublishObjectDTO): PublishObjectDTO => {
     const reactComponent = cmsObjects[dto.object.type];
 
-    if(dto.type == ParseType.PUBLISH && reactComponent.getSsgData) {
-        dto.data[dto.object.id] = {
-            data: reactComponent.getSsgData(dto.object.settings),
-            validUntill: reactComponent.isrTimeliness ? (new Date((new Date).getTime() + reactComponent.isrTimeliness * 1000)).getTime() : 0
-        };
-    }
-    if(dto.type == ParseType.REQUEST) {        
-        if(dto.initData[dto.object.id]?.validUntill && (new Date).getTime() - dto.initData[dto.object.id]?.validUntill > 0) {
+    if(dto.type != ParseType.CSR) {
+        if(dto.type == ParseType.PUBLISH && reactComponent.getSsgData) {
             dto.data[dto.object.id] = {
                 data: reactComponent.getSsgData(dto.object.settings),
-                validUntill: (new Date((new Date).getTime() + reactComponent.isrTimeliness * 1000)).getTime()
+                validUntill: reactComponent.isrTimeliness ? (new Date((new Date).getTime() + reactComponent.isrTimeliness * 1000)).getTime() : 0
             };
         }
-        if(reactComponent.getSsrData) {
-            dto.data[dto.object.id] = reactComponent.getSsrData(dto.object.settings);
+        if(dto.type == ParseType.REQUEST) {        
+            if(dto.initData[dto.object.id]?.validUntill && (new Date).getTime() - dto.initData[dto.object.id]?.validUntill > 0) {
+                dto.data[dto.object.id] = {
+                    data: reactComponent.getSsgData(dto.object.settings),
+                    validUntill: (new Date((new Date).getTime() + reactComponent.isrTimeliness * 1000)).getTime()
+                };
+            }
+            if(reactComponent.getSsrData) {
+                dto.data[dto.object.id] = reactComponent.getSsrData(dto.object.settings);
+            }
         }
     }
 

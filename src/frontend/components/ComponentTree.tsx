@@ -5,7 +5,8 @@ import useCmsObjectData from '../hooks/useCmsObjectData';
 const ComponentTree = (props) => {
 
     const {
-        cmsObject
+        cmsObject,
+        cmsObjects
     } = props;
 
     const Component = cmsObjects[cmsObject.type]?.default
@@ -17,7 +18,7 @@ const ComponentTree = (props) => {
             settings={cmsObject.settings}
             id={cmsObject.id}
         >
-            {cmsObject.children?.map?.(child => <ComponentTree key={child.id} cmsObject={child} />)}
+            {cmsObject.children?.map?.(child => <ComponentTree key={child.id} cmsObject={child} cmsObjects={cmsObjects} />)}
         </Component>
     );
 }
