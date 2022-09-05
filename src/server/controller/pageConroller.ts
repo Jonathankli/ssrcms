@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
+import rendererPage from "../../utils/renderer";
 import parseObjectTree, { ParseType } from "../..//utils/objectTreeParser";
 import pathGenerator from "../../utils/pathGenerator";
 
@@ -23,29 +24,38 @@ export const getPageData = async (req: Request, res: Response) => {
         return;
     })
 
+    const initData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "data.json"))).toString());
     const pageData = JSON.parse((await fs.promises.readFile(path.join(sitePath, "pageData.json"))).toString());
-    const { data, components, usesSsg, usesSsr } = await parseObjectTree(pageData, ParseType.REQUEST);
+    const { data, components, usesSsg, usesSsr, usesIsr } = await parseObjectTree(pageData, ParseType.REQUEST, initData);
     
     let _data = data;
-    if(usesSsg) {
+    if(usesSsg || usesIsr) {
         _data = {
-            ...JSON.parse((await fs.promises.readFile(path.join(sitePath, "data.json"))).toString()),
+            ...initData,
             ...data, 
         }
     }
 
+    const formattedData = {}
     Object.keys(_data).forEach(key => {
-        _data[key] = _data[key].data;
+        formattedData[key] = _data[key].data;
     });
 
     res.status(200).json({
         status: "success",
         data: {
             components,
-            pageData: _data,
+            pageData: formattedData,
             title: pageData.title
         }
     });
+
+    const html = rendererPage(components, _data, pageData.title);
+
+    if(!usesSsr) {      
+        await fs.promises.writeFile(path.join(sitePath, "index.html"), html);
+        await fs.promises.writeFile(path.join(sitePath, "data.json"), JSON.stringify(_data));
+    }
     
 }
 export const getPageDataCsr = async (req: Request, res: Response) => {
