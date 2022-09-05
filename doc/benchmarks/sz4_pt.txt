@@ -1,0 +1,52 @@
+jonathanklinger@MBPvonCFMAdmin bachelor_api % ab -n 500 -c 10  https://bachelor-cms.herokuapp.com/szenario4 
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking bachelor-cms.herokuapp.com (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Finished 500 requests
+
+
+Server Software:        Cowboy
+Server Hostname:        bachelor-cms.herokuapp.com
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES128-GCM-SHA256,2048,128
+Server Temp Key:        ECDH P-256 256 bits
+TLS Server Name:        bachelor-cms.herokuapp.com
+
+Document Path:          /szenario4
+Document Length:        4744 bytes
+
+Concurrency Level:      10
+Time taken for tests:   131.792 seconds
+Complete requests:      500
+Failed requests:        0
+Total transferred:      2490000 bytes
+HTML transferred:       2372000 bytes
+Requests per second:    3.79 [#/sec] (mean)
+Time per request:       2635.832 [ms] (mean)
+Time per request:       263.583 [ms] (mean, across all concurrent requests)
+Transfer rate:          18.45 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:      121  147  11.1    145     186
+Processing:  1400 2431 512.3   2783    3994
+Waiting:     1399 2430 512.4   2783    3994
+Total:       1534 2577 516.0   2937    4121
+
+Percentage of the requests served within a certain time (ms)
+  50%   2937
+  66%   3060
+  75%   3071
+  80%   3073
+  90%   3121
+  95%   3142
+  98%   3175
+  99%   3204
+ 100%   4121 (longest request)
