@@ -34,6 +34,6 @@ export const getSsgData = async settings => {
         .then(res => res.data.data);
 }
 
-export const isrTimeliness = 5;
+export const isrTimeliness = 30;
 
 export default Teaser;
